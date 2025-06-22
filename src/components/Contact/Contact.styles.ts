@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { type DefaultTheme, styled } from "styled-components";
 
 export const ContactContainer = styled.section`
@@ -16,7 +17,7 @@ export const ContactContainer = styled.section`
   }
 `;
 
-export const SectionTitle = styled.h2`
+export const SectionTitle = styled(motion.h2)`
   font-size: 2.5rem;
   margin-bottom: 3rem;
   text-align: center;
@@ -39,7 +40,7 @@ export const SectionTitle = styled.h2`
   }
 `;
 
-export const Form = styled.form`
+export const ContactForm = styled(motion.form)`
   width: 100%;
   max-width: 600px;
   display: flex;
@@ -63,47 +64,21 @@ export const Form = styled.form`
   }
 `;
 
-export const InputGroup = styled.div`
-  position: relative;
+export const FormGroup = styled(motion.div)`
   display: flex;
-  align-items: center;
-
-  svg {
-    position: absolute;
-    left: 1rem;
-    color: ${({ theme }) => theme.text}77;
-    transition: color 0.3s ease;
-    z-index: 1;
-  }
-
-  input:focus + svg,
-  textarea:focus + svg {
-    color: ${({ theme }) => theme.accent};
-  }
-
-  textarea + svg {
-    top: 1rem;
-    transform: translateY(0);
-  }
-
-  @media (max-width: 768px) {
-    svg {
-      left: 0.75rem;
-      font-size: 0.9rem;
-    }
-  }
+  flex-direction: column;
+  gap: 0.5rem;
 `;
 
 const commonInputStyles = ({ theme }: { theme: DefaultTheme }) => `
   width: 100%;
   padding: 1rem;
   border-radius: 8px;
-  border: 1px solid transparent;
+  border: 1px solid ${theme.cardBorder};
   background-color: ${theme.background};
   color: ${theme.text};
   font-size: 1rem;
   transition: all 0.3s ease;
-  padding-left: 3rem;
 
   &:focus {
     outline: none;
@@ -125,7 +100,6 @@ export const Input = styled.input`
 export const TextArea = styled.textarea`
   ${commonInputStyles}
   resize: vertical;
-  padding-top: 1rem;
   min-height: 120px;
 
   @media (max-width: 768px) {
@@ -134,7 +108,7 @@ export const TextArea = styled.textarea`
   }
 `;
 
-export const SubmitButton = styled.button`
+export const SubmitButton = styled(motion.button)`
   padding: 1rem 2rem;
   background-color: ${({ theme }) => theme.accent};
   color: #fff;
