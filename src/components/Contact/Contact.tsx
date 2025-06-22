@@ -93,6 +93,7 @@ const Contact: React.FC = () => {
           <Lottie
             animationData={animationData}
             loop={false}
+            autoplay={true}
             style={{ width: 150, height: 150, margin: "0 auto" }}
           />
           <h3
