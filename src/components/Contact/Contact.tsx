@@ -1,0 +1,147 @@
+import { motion, type Variants } from "framer-motion";
+import React, { useState } from "react";
+import { toast } from "react-hot-toast";
+import { useTranslation } from "react-i18next";
+import { FaCommentDots, FaEnvelope, FaUser } from "react-icons/fa";
+import {
+  ContactContainer,
+  Form,
+  Input,
+  InputGroup,
+  SectionTitle,
+  SubmitButton,
+  TextArea,
+} from "./Contact.styles";
+
+const titleVariants: Variants = {
+  offscreen: { y: -30, opacity: 0 },
+  onscreen: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      damping: 20,
+    },
+  },
+};
+
+const formItemVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
+
+const Contact: React.FC = () => {
+  const { t } = useTranslation();
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    const notification = toast.loading("Envoi de votre message...");
+
+    try {
+      const response = await fetch("/api/contact.mjs", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || "Une erreur est survenue.");
+      }
+
+      toast.success("Message envoyé avec succès !", { id: notification });
+      setFormData({ name: "", email: "", message: "" });
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : "Erreur inconnue.";
+      toast.error(`Erreur: ${errorMessage}`, { id: notification });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <ContactContainer id="contact">
+      <SectionTitle
+        as={motion.h2}
+        initial="offscreen"
+        whileInView="onscreen"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={titleVariants}
+      >
+        {t("contact")}
+      </SectionTitle>
+      <Form
+        onSubmit={handleSubmit}
+        as={motion.form}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ staggerChildren: 0.2 }}
+      >
+        <motion.div variants={formItemVariants}>
+          <InputGroup>
+            <Input
+              type="text"
+              name="name"
+              placeholder={t("contact_form.name")}
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+            <FaUser />
+          </InputGroup>
+        </motion.div>
+        <motion.div variants={formItemVariants}>
+          <InputGroup>
+            <Input
+              type="email"
+              name="email"
+              placeholder={t("contact_form.email")}
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+            <FaEnvelope />
+          </InputGroup>
+        </motion.div>
+        <motion.div variants={formItemVariants}>
+          <InputGroup>
+            <TextArea
+              name="message"
+              placeholder={t("contact_form.message")}
+              rows={5}
+              value={formData.message}
+              onChange={handleChange}
+              required
+            ></TextArea>
+            <FaCommentDots />
+          </InputGroup>
+        </motion.div>
+        <motion.div variants={formItemVariants}>
+          <SubmitButton type="submit" disabled={isLoading}>
+            {isLoading ? t("contact_form.sending") : t("contact_form.send")}
+          </SubmitButton>
+        </motion.div>
+      </Form>
+    </ContactContainer>
+  );
+};
+
+export default Contact;
