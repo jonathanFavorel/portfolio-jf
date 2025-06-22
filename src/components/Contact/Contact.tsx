@@ -1,6 +1,6 @@
 import { motion, type Variants } from "framer-motion";
-import Lottie from "lottie-react";
-import React, { useState } from "react";
+import Lottie, { type LottieRefCurrentProps } from "lottie-react";
+import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { FaCommentDots, FaEnvelope, FaUser } from "react-icons/fa";
@@ -43,6 +43,13 @@ const Contact: React.FC = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const lottieRef = useRef<LottieRefCurrentProps>(null);
+
+  useEffect(() => {
+    if (isSuccess) {
+      lottieRef.current?.play();
+    }
+  }, [isSuccess]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -91,9 +98,10 @@ const Contact: React.FC = () => {
           style={{ textAlign: "center" }}
         >
           <Lottie
+            lottieRef={lottieRef}
             animationData={animationData}
             loop={false}
-            autoplay={true}
+            autoplay={false}
             style={{ width: 150, height: 150, margin: "0 auto" }}
           />
           <h3
