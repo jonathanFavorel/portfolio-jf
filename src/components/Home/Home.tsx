@@ -1,7 +1,7 @@
 import { motion, type Variants } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaDownload, FaGithub, FaLinkedin } from "react-icons/fa";
 import {
   ButtonContainer,
   CTAButton,
@@ -25,6 +25,7 @@ interface PersonalInfo {
   about: string;
   aboutEn: string;
   avatar: string;
+  cvUrl?: string;
 }
 
 interface HomeProps {
@@ -37,24 +38,22 @@ interface HomeProps {
 
 const Home: React.FC<HomeProps> = ({ personalInfo, socialLinks }) => {
   const { t, i18n } = useTranslation();
-  const isEnglish = i18n.language === "en";
-  const [dynamicCvUrl, setDynamicCvUrl] = useState("");
+  const [cvUrl, setCvUrl] = useState<string>("");
 
   useEffect(() => {
     const fetchCvUrl = async () => {
       try {
-        const response = await fetch("/api/cv");
-        if (response.ok) {
-          const data = await response.json();
+        const res = await fetch("/api/cv");
+        if (res.ok) {
+          const data = await res.json();
           if (data.url) {
-            setDynamicCvUrl(data.url);
+            setCvUrl(`${data.url}?t=${new Date().getTime()}`);
           }
         }
       } catch (error) {
-        console.error("Failed to fetch CV URL:", error);
+        console.error("Impossible de récupérer l'URL du CV", error);
       }
     };
-
     fetchCvUrl();
   }, []);
 
@@ -124,7 +123,7 @@ const Home: React.FC<HomeProps> = ({ personalInfo, socialLinks }) => {
         initial="hidden"
         animate="visible"
       >
-        {isEnglish ? personalInfo.titleEn : personalInfo.title}
+        {i18n.language === "fr" ? personalInfo.title : personalInfo.titleEn}
       </Subtitle>
 
       <SocialLinksContainer
@@ -152,9 +151,11 @@ const Home: React.FC<HomeProps> = ({ personalInfo, socialLinks }) => {
         animate="visible"
       >
         <CTAButton href="#contact">{t("home.cta")}</CTAButton>
-        <SecondaryButton href={dynamicCvUrl || "/demo-cv.pdf"} download>
-          {t("home.download_cv")}
-        </SecondaryButton>
+        {cvUrl && (
+          <SecondaryButton href={cvUrl} download>
+            <FaDownload /> {t("home.download_cv")}
+          </SecondaryButton>
+        )}
       </ButtonContainer>
     </HomeContainer>
   );

@@ -426,71 +426,70 @@ const Dashboard = () => {
     }
   };
 
-  useEffect(() => {
-    const fetchCvUrl = async () => {
-      try {
-        const response = await fetch("/api/cv");
-        if (response.ok) {
-          const data = await response.json();
-          setCvUrl(data.url);
-        }
-      } catch {
-        console.error("Erreur lors de la récupération de l'URL du CV.");
-      }
-    };
-    fetchCvUrl();
-  }, []);
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      setCvFile(e.target.files[0]);
-    }
-  };
-
   const handleCvUpload = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!cvFile) {
-      alert("Veuillez sélectionner un fichier.");
+      toast.error("Veuillez sélectionner un fichier CV.");
       return;
     }
-
     setIsLoading(true);
-
-    const toBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
-      new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = (error) => reject(error);
-      });
 
     try {
       const base64 = await toBase64(cvFile);
       const response = await fetch("/api/cv", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ file: base64 }),
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Échec du téléversement du CV.");
+        throw new Error("Échec du téléversement du CV");
       }
 
-      const { url } = await response.json();
-      setCvUrl(url);
+      await response.json();
+
+      // Forcer le rafraîchissement
+      await fetchCvUrl();
       toast.success("CV téléversé avec succès !");
     } catch (error) {
-      const errorMessage =
-        error instanceof Error
-          ? error.message
-          : "Une erreur inconnue est survenue.";
       console.error(error);
-      alert(`Erreur: ${errorMessage}`);
+      toast.error("Erreur lors du téléversement du CV.");
     } finally {
       setIsLoading(false);
+      setCvFile(null);
+      // Réinitialiser l'input de fichier
+      const form = event.target as HTMLFormElement;
+      form.reset();
+    }
+  };
+
+  const toBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+
+  const fetchCvUrl = async () => {
+    try {
+      const res = await fetch("/api/cv");
+      const data = await res.json();
+      // Cache-busting
+      if (data.url) {
+        setCvUrl(`${data.url}?t=${new Date().getTime()}`);
+      } else {
+        setCvUrl("");
+      }
+    } catch (error) {
+      console.error("Impossible de récupérer l'URL du CV", error);
+      setCvUrl("");
+    }
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      setCvFile(e.target.files[0]);
     }
   };
 
@@ -1924,9 +1923,14 @@ const Dashboard = () => {
                   <label>CV Actuel</label>
                   {cvUrl ? (
                     <PreviewCard>
-                      <a href={cvUrl} target="_blank" rel="noopener noreferrer">
-                        <Button>
-                          <FaDownload /> Télécharger le CV
+                      <a
+                        href={cvUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ textDecoration: "none" }}
+                      >
+                        <Button as="span">
+                          <FaDownload /> Télécharger le CV actuel
                         </Button>
                       </a>
                     </PreviewCard>
