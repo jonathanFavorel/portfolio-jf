@@ -67,11 +67,11 @@ const Contact: React.FC = () => {
 
       toast.success("Message envoyé avec succès !", { id: notification });
       setFormData({ name: "", email: "", message: "" });
+      setIsLoading(false);
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : "Erreur inconnue.";
       toast.error(`Erreur: ${errorMessage}`, { id: notification });
-    } finally {
       setIsLoading(false);
     }
   };
