@@ -1,7 +1,7 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { ThemeProvider as StyledThemeProvider } from "styled-components";
 import About from "./components/About/About";
-import Contact from "./components/Contact/Contact";
+import { Contact } from "./components/Contact/Contact";
 import CustomCursor from "./components/CustomCursor/CustomCursor";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Footer from "./components/Footer/Footer";
