@@ -94,21 +94,20 @@ const Portfolio = () => {
     <StyledThemeProvider theme={currentTheme}>
       <CustomCursor />
       <GlobalStyles />
-      {activeBackgroundOptions &&
-        activeBackgroundOptions.particles?.number?.value > 0 && (
-          <div
-            style={{
-              position: "fixed",
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              zIndex: -1,
-            }}
-          >
-            <AnimatedBackground options={activeBackgroundOptions} />
-          </div>
-        )}
+      {activeBackgroundOptions && activeBackgroundOptions.fullScreen && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: -1,
+          }}
+        >
+          <AnimatedBackground options={activeBackgroundOptions} />
+        </div>
+      )}
       <Header />
       <main>
         <Home
