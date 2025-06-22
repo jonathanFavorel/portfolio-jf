@@ -1,21 +1,25 @@
-import { kv } from "@vercel/kv";
+import Redis from "ioredis";
 
 export const runtime = "edge";
 
-// Clé unique pour stocker nos données dans Vercel KV
+// Clé unique pour stocker nos données dans Redis
 const PORTFOLIO_DATA_KEY = "portfolio-data";
+
+// Créer une nouvelle instance Redis en utilisant l'URL de l'environnement
+const redis = new Redis(process.env.REDIS_URL);
 
 export async function GET(request) {
   try {
-    const data = await kv.get(PORTFOLIO_DATA_KEY);
+    const data = await redis.get(PORTFOLIO_DATA_KEY);
     if (!data) {
       return Response.json({ message: "No data found" }, { status: 404 });
     }
-    return Response.json(data);
+    // Les données de Redis sont une chaîne, il faut la parser
+    return Response.json(JSON.parse(data));
   } catch (error) {
-    console.error("KV GET Error:", error);
+    console.error("Redis GET Error:", error);
     return Response.json(
-      { message: "Failed to fetch data from KV." },
+      { message: "Failed to fetch data from Redis." },
       { status: 500 }
     );
   }
@@ -24,12 +28,13 @@ export async function GET(request) {
 export async function POST(request) {
   try {
     const newData = await request.json();
-    await kv.set(PORTFOLIO_DATA_KEY, newData);
+    // Il faut convertir les données en chaîne avant de les sauvegarder dans Redis
+    await redis.set(PORTFOLIO_DATA_KEY, JSON.stringify(newData));
     return Response.json({ message: "Data saved successfully." });
   } catch (error) {
-    console.error("KV SET Error:", error);
+    console.error("Redis SET Error:", error);
     return Response.json(
-      { message: "Failed to save data to KV." },
+      { message: "Failed to save data to Redis." },
       { status: 500 }
     );
   }
