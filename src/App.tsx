@@ -74,8 +74,6 @@ const Portfolio = () => {
     );
   }
 
-  const cvUrl = data.personalInfo.cvUrl || "/demo-cv.pdf";
-
   return (
     <StyledThemeProvider theme={currentTheme}>
       <CustomCursor />
@@ -88,7 +86,6 @@ const Portfolio = () => {
             github: data.socialLinks.github,
             linkedin: data.socialLinks.linkedin,
           }}
-          cvUrl={cvUrl}
         />
         <About
           personalInfo={data.personalInfo}

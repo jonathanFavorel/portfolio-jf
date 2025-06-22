@@ -1,4 +1,5 @@
 import { motion, type Variants } from "framer-motion";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import {
@@ -32,12 +33,30 @@ interface HomeProps {
     github: string;
     linkedin: string;
   };
-  cvUrl: string;
 }
 
-const Home: React.FC<HomeProps> = ({ personalInfo, socialLinks, cvUrl }) => {
+const Home: React.FC<HomeProps> = ({ personalInfo, socialLinks }) => {
   const { t, i18n } = useTranslation();
   const isEnglish = i18n.language === "en";
+  const [dynamicCvUrl, setDynamicCvUrl] = useState("");
+
+  useEffect(() => {
+    const fetchCvUrl = async () => {
+      try {
+        const response = await fetch("/api/cv");
+        if (response.ok) {
+          const data = await response.json();
+          if (data.url) {
+            setDynamicCvUrl(data.url);
+          }
+        }
+      } catch (error) {
+        console.error("Failed to fetch CV URL:", error);
+      }
+    };
+
+    fetchCvUrl();
+  }, []);
 
   const title = t("home.title").replace("Jonathan Favorel", personalInfo.name);
   const words = title.split(" ");
@@ -133,7 +152,7 @@ const Home: React.FC<HomeProps> = ({ personalInfo, socialLinks, cvUrl }) => {
         animate="visible"
       >
         <CTAButton href="#contact">{t("home.cta")}</CTAButton>
-        <SecondaryButton href={cvUrl || "/demo-cv.pdf"} download>
+        <SecondaryButton href={dynamicCvUrl || "/demo-cv.pdf"} download>
           {t("home.download_cv")}
         </SecondaryButton>
       </ButtonContainer>
