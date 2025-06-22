@@ -19,6 +19,7 @@ import {
   FaLinkedin,
   FaLock,
   FaMoon,
+  FaPalette,
   FaPlus,
   FaProjectDiagram,
   FaReact,
@@ -45,6 +46,7 @@ import type {
 import { usePortfolioData } from "../../hooks/usePortfolioData";
 import { darkTheme, lightTheme } from "../../styles/theme";
 import { availableIcons as iconComponents, iconNameMap } from "../shared/icons";
+import BackgroundSelector from "./BackgroundSelector";
 import {
   ActionButton,
   Badge,
@@ -776,6 +778,12 @@ const Dashboard = () => {
             onClick={() => handleSectionChange("cv")}
           >
             <FaFilePdf /> Gestion du CV
+          </button>
+          <button
+            className={activeSection === "theme" ? "active" : ""}
+            onClick={() => handleSectionChange("theme")}
+          >
+            <FaPalette /> Thème et Fond d'écran
           </button>
           <button
             className={activeSection === "settings" ? "active" : ""}
@@ -1943,6 +1951,28 @@ const Dashboard = () => {
                 </FormGroup>
               </Grid>
             </Section>
+          )}
+
+          {activeSection === "theme" && (
+            <BackgroundSelector
+              currentBackground={
+                localData?.personalInfo?.backgroundKey || "default"
+              }
+              onSelect={(key: string) => {
+                if (localData?.personalInfo) {
+                  const updatedData = {
+                    ...localData,
+                    personalInfo: {
+                      ...localData.personalInfo,
+                      backgroundKey: key,
+                    },
+                  };
+                  setLocalData(updatedData);
+                  saveData(updatedData);
+                  toast.success(`Fond d'écran "${key}" sélectionné !`);
+                }
+              }}
+            />
           )}
 
           {activeSection === "social" && localData && (

@@ -12,6 +12,7 @@ export interface PersonalInfo {
   aboutEn: string;
   avatar: string;
   cvUrl?: string;
+  backgroundKey?: string;
 }
 
 export interface Experience {
@@ -87,6 +88,7 @@ const defaultData: PortfolioData = {
       "Passionate developer specializing in modern web technologies. I love creating performant applications and exceptional user experiences. My expertise covers frontend and backend development, with a particular focus on code quality and best practices.",
     avatar: "https://i.pravatar.cc/150?u=jonathan",
     cvUrl: "/demo-cv.pdf",
+    backgroundKey: "default",
   },
   experiences: [
     // --- Professional Experience ---

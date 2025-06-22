@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { ThemeProvider as StyledThemeProvider } from "styled-components";
 import About from "./components/About/About";
@@ -8,9 +9,11 @@ import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import Home from "./components/Home/Home";
 import Projects from "./components/Projects";
+import AnimatedBackground from "./components/shared/AnimatedBackground";
 import Skills from "./components/Skills/Skills";
 import Testimonials from "./components/Testimonials/Testimonials";
 import { ThemeProvider } from "./context/ThemeContext";
+import { backgroundOptions } from "./data/backgrounds";
 import { usePortfolioData } from "./hooks/usePortfolioData";
 import { useTheme } from "./hooks/useTheme";
 import { GlobalStyles } from "./styles/GlobalStyles";
@@ -32,6 +35,19 @@ function App() {
 const Portfolio = () => {
   const { data, loading, error } = usePortfolioData();
   const { theme } = useTheme();
+  const [activeBackgroundOptions, setActiveBackgroundOptions] = useState(
+    backgroundOptions.default
+  );
+
+  useEffect(() => {
+    if (data?.personalInfo?.backgroundKey) {
+      const key = data.personalInfo.backgroundKey;
+      setActiveBackgroundOptions(
+        backgroundOptions[key] || backgroundOptions.default
+      );
+    }
+  }, [data]);
+
   const currentTheme = theme === "light" ? lightTheme : darkTheme;
 
   if (loading) {
@@ -78,6 +94,9 @@ const Portfolio = () => {
     <StyledThemeProvider theme={currentTheme}>
       <CustomCursor />
       <GlobalStyles />
+      {activeBackgroundOptions && (
+        <AnimatedBackground options={activeBackgroundOptions} />
+      )}
       <Header />
       <main>
         <Home

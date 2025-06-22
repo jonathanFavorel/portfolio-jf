@@ -10,7 +10,8 @@
     "about": "Développeur passionné spécialisé dans les technologies web modernes. J'aime créer des applications performantes et des expériences utilisateur exceptionnelles. Mon expertise couvre le développement frontend et backend, avec une attention particulière portée à la qualité du code et aux bonnes pratiques.",
     "aboutEn": "Passionate developer specializing in modern web technologies. I love creating performant applications and exceptional user experiences. My expertise covers frontend and backend development, with a particular focus on code quality and best practices.",
     "avatar": "https://i.pravatar.cc/150?u=jonathan",
-    "cvUrl": "/demo-cv.pdf"
+    "cvUrl": "/demo-cv.pdf",
+    "backgroundKey": "default"
   },
   "experiences": [
     {
