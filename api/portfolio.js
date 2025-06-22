@@ -1,6 +1,6 @@
 import { kv } from '@vercel/kv';
 
-export const runtime = 'nodejs';
+export const runtime = 'edge';
 
 // Clé unique pour stocker nos données dans Vercel KV
 const PORTFOLIO_DATA_KEY = 'portfolio-data';
