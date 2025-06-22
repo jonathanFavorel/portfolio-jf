@@ -2,10 +2,11 @@ import type { ISourceOptions } from "@tsparticles/engine";
 
 export const backgroundOptions: Record<string, ISourceOptions> = {
   default: {
+    fullScreen: { enable: false },
     /* Configuration par défaut (peut-être vide ou très simple) */
   },
   constellation: {
-    fullScreen: { enable: true },
+    fullScreen: { enable: false },
     particles: {
       number: { value: 80, density: { enable: true } },
       color: { value: "#ffffff" },
@@ -38,7 +39,7 @@ export const backgroundOptions: Record<string, ISourceOptions> = {
     },
   },
   bubbles: {
-    fullScreen: { enable: true },
+    fullScreen: { enable: false },
     particles: {
       number: { value: 30, density: { enable: true } },
       color: { value: "#ffffff" },
@@ -62,7 +63,7 @@ export const backgroundOptions: Record<string, ISourceOptions> = {
     },
   },
   snow: {
-    fullScreen: { enable: true },
+    fullScreen: { enable: false },
     particles: {
       number: { value: 250, density: { enable: true } },
       color: { value: "#ffffff" },
@@ -77,7 +78,7 @@ export const backgroundOptions: Record<string, ISourceOptions> = {
     },
   },
   nasa: {
-    fullScreen: { enable: true },
+    fullScreen: { enable: false },
     particles: {
       number: { value: 160, density: { enable: false } },
       size: { value: { min: 1, max: 3 } },
@@ -104,7 +105,7 @@ export const backgroundOptions: Record<string, ISourceOptions> = {
     },
   },
   polygon: {
-    fullScreen: { enable: true },
+    fullScreen: { enable: false },
     particles: {
       number: { value: 50 },
       color: { value: "#ffffff" },
@@ -138,7 +139,7 @@ export const backgroundOptions: Record<string, ISourceOptions> = {
     },
   },
   fireworks: {
-    fullScreen: { enable: true },
+    fullScreen: { enable: false },
     background: { color: "#000000" },
     emitters: {
       direction: "top",
@@ -187,7 +188,7 @@ export const backgroundOptions: Record<string, ISourceOptions> = {
     },
   },
   sea: {
-    fullScreen: { enable: true },
+    fullScreen: { enable: false },
     particles: {
       number: { value: 100 },
       color: { value: "#00bfff" },
@@ -208,7 +209,7 @@ export const backgroundOptions: Record<string, ISourceOptions> = {
     },
   },
   stars: {
-    fullScreen: { enable: true },
+    fullScreen: { enable: false },
     particles: {
       number: { value: 200, density: { enable: true } },
       color: { value: "#fff" },
@@ -224,7 +225,7 @@ export const backgroundOptions: Record<string, ISourceOptions> = {
     },
   },
   techno: {
-    fullScreen: { enable: true },
+    fullScreen: { enable: false },
     particles: {
       number: { value: 100 },
       color: { value: "#0f0" },
@@ -243,7 +244,7 @@ export const backgroundOptions: Record<string, ISourceOptions> = {
     },
   },
   matrix: {
-    fullScreen: { enable: true },
+    fullScreen: { enable: false },
     particles: {
       number: { value: 80 },
       color: { value: "#00ff00" },
@@ -271,7 +272,7 @@ export const backgroundOptions: Record<string, ISourceOptions> = {
     },
   },
   confetti: {
-    fullScreen: { enable: true },
+    fullScreen: { enable: false },
     particles: {
       number: { value: 0 },
       color: { value: ["#FFD700", "#FF4500", "#FF69B4", "#1E90FF"] },
@@ -294,7 +295,7 @@ export const backgroundOptions: Record<string, ISourceOptions> = {
     },
   },
   rain: {
-    fullScreen: { enable: true },
+    fullScreen: { enable: false },
     particles: {
       number: { value: 100 },
       color: { value: "#aaaaaa" },
@@ -310,7 +311,7 @@ export const backgroundOptions: Record<string, ISourceOptions> = {
     },
   },
   hyperspace: {
-    fullScreen: { enable: true },
+    fullScreen: { enable: false },
     particles: {
       number: { value: 300, density: { enable: true } },
       color: { value: "#ffffff" },
