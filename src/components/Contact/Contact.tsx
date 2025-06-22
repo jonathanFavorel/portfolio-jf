@@ -1,4 +1,5 @@
 import { motion, type Variants } from "framer-motion";
+import Lottie from "lottie-react";
 import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
@@ -12,6 +13,8 @@ import {
   SubmitButton,
   TextArea,
 } from "./Contact.styles";
+
+import animationData from "../../assets/success-animation.json";
 
 const titleVariants: Variants = {
   offscreen: { y: -30, opacity: 0 },
@@ -39,6 +42,7 @@ const Contact: React.FC = () => {
     message: "",
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -67,14 +71,52 @@ const Contact: React.FC = () => {
 
       toast.success("Message envoyé avec succès !", { id: notification });
       setFormData({ name: "", email: "", message: "" });
-      setIsLoading(false);
+      setIsSuccess(true);
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : "Erreur inconnue.";
       toast.error(`Erreur: ${errorMessage}`, { id: notification });
+    } finally {
       setIsLoading(false);
     }
   };
+
+  if (isSuccess) {
+    return (
+      <ContactContainer id="contact">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          style={{ textAlign: "center" }}
+        >
+          <Lottie
+            animationData={animationData}
+            loop={false}
+            style={{ width: 150, height: 150, margin: "0 auto" }}
+          />
+          <h3
+            style={{
+              color: "#34D399",
+              marginTop: "1.5rem",
+              fontSize: "1.5rem",
+            }}
+          >
+            {t("contact_form.success_title")}
+          </h3>
+          <p
+            style={{
+              marginTop: "0.5rem",
+              fontSize: "1.1rem",
+              color: "#6B7280",
+            }}
+          >
+            {t("contact_form.success_message")}
+          </p>
+        </motion.div>
+      </ContactContainer>
+    );
+  }
 
   return (
     <ContactContainer id="contact">

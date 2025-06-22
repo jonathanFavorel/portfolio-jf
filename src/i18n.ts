@@ -27,6 +27,9 @@ i18n
             message: "Votre message",
             send: "Envoyer",
             sending: "Envoi en cours...",
+            success_title: "Message envoyé !",
+            success_message:
+              "Merci de m'avoir contacté. Je vous répondrai dès que possible.",
           },
           home: {
             title: "Jonathan Favorel, Développeur Web",
@@ -113,6 +116,9 @@ i18n
             message: "Your Message",
             send: "Send",
             sending: "Sending...",
+            success_title: "Message Sent!",
+            success_message:
+              "Thank you for contacting me. I will get back to you as soon as possible.",
           },
           home: {
             title: "Jonathan Favorel, Web Developer",
