@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { useWindowSize } from "../../hooks/useWindowSize";
 
 const Cursor = styled(motion.div)`
   position: fixed;
@@ -18,6 +19,7 @@ const Cursor = styled(motion.div)`
 const CustomCursor = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const { width } = useWindowSize();
 
   useEffect(() => {
     if ("ontouchstart" in window || navigator.maxTouchPoints > 0) {
@@ -36,7 +38,7 @@ const CustomCursor = () => {
     };
   }, []);
 
-  if (isTouchDevice) {
+  if (isTouchDevice || width < 768) {
     return null;
   }
 
