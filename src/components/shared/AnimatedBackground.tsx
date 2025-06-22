@@ -1,8 +1,7 @@
-import { initParticlesEngine } from "@tsparticles/react";
+import type { Engine, ISourceOptions } from "@tsparticles/engine";
+import { Particles, initParticlesEngine } from "@tsparticles/react";
+import { loadSlim } from "@tsparticles/slim";
 import React, { memo, useEffect, useState } from "react";
-import { Particles } from "react-tsparticles";
-import type { Engine, ISourceOptions } from "tsparticles-engine";
-import { loadSlim } from "tsparticles-slim";
 
 interface AnimatedBackgroundProps {
   options: ISourceOptions;

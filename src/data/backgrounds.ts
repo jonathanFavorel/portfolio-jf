@@ -1,4 +1,4 @@
-import type { ISourceOptions } from "tsparticles-engine";
+import type { ISourceOptions } from "@tsparticles/engine";
 
 export const backgroundOptions: Record<string, ISourceOptions> = {
   default: {
@@ -7,11 +7,11 @@ export const backgroundOptions: Record<string, ISourceOptions> = {
   constellation: {
     fullScreen: { enable: true },
     particles: {
-      number: { value: 80, density: { enable: true, value_area: 800 } },
+      number: { value: 80, density: { enable: true } },
       color: { value: "#ffffff" },
       shape: { type: "circle" },
-      opacity: { value: 0.5, random: false },
-      size: { value: 2, random: true },
+      opacity: { value: 0.5 },
+      size: { value: { min: 1, max: 3 } },
       links: {
         enable: true,
         distance: 150,
@@ -23,13 +23,13 @@ export const backgroundOptions: Record<string, ISourceOptions> = {
         enable: true,
         speed: 1,
         direction: "none",
-        out_mode: "out",
+        outModes: "out",
       },
     },
     interactivity: {
       events: {
-        onhover: { enable: true, mode: "grab" },
-        onclick: { enable: true, mode: "push" },
+        onHover: { enable: true, mode: "grab" },
+        onClick: { enable: true, mode: "push" },
       },
       modes: {
         grab: { distance: 140, links: { opacity: 1 } },
@@ -40,21 +40,21 @@ export const backgroundOptions: Record<string, ISourceOptions> = {
   bubbles: {
     fullScreen: { enable: true },
     particles: {
-      number: { value: 30, density: { enable: true, value_area: 800 } },
+      number: { value: 30, density: { enable: true } },
       color: { value: "#ffffff" },
       shape: { type: "circle" },
-      opacity: { value: 0.3, random: true },
-      size: { value: 10, random: { enable: true, minimumValue: 5 } },
+      opacity: { value: { min: 0.1, max: 0.5 } },
+      size: { value: { min: 5, max: 15 } },
       move: {
         enable: true,
         speed: 2,
         direction: "top",
-        out_mode: "out",
+        outModes: "out",
       },
     },
     interactivity: {
       events: {
-        onhover: { enable: true, mode: "bubble" },
+        onHover: { enable: true, mode: "bubble" },
       },
       modes: {
         bubble: { distance: 400, size: 40, opacity: 1 },
@@ -64,10 +64,10 @@ export const backgroundOptions: Record<string, ISourceOptions> = {
   snow: {
     fullScreen: { enable: true },
     particles: {
-      number: { value: 250, density: { enable: true, value_area: 800 } },
+      number: { value: 250, density: { enable: true } },
       color: { value: "#ffffff" },
       opacity: { value: 0.5 },
-      size: { value: 2, random: true },
+      size: { value: { min: 1, max: 3 } },
       move: {
         enable: true,
         speed: 1,
@@ -80,22 +80,23 @@ export const backgroundOptions: Record<string, ISourceOptions> = {
     fullScreen: { enable: true },
     particles: {
       number: { value: 160, density: { enable: false } },
-      size: { value: 3, random: true },
+      size: { value: { min: 1, max: 3 } },
       move: {
         direction: "right",
         speed: 0.05,
       },
       opacity: {
-        anim: {
+        value: { min: 0.1, max: 0.5 },
+        animation: {
           enable: true,
           speed: 1,
-          opacity_min: 0.05,
+          sync: false,
         },
       },
     },
     interactivity: {
       events: {
-        onhover: { enable: true, mode: "repulse" },
+        onHover: { enable: true, mode: "repulse" },
       },
       modes: {
         repulse: { distance: 50 },
@@ -129,7 +130,7 @@ export const backgroundOptions: Record<string, ISourceOptions> = {
     },
     interactivity: {
       events: {
-        onhover: {
+        onHover: {
           enable: true,
           mode: "repulse",
         },
@@ -174,7 +175,7 @@ export const backgroundOptions: Record<string, ISourceOptions> = {
           destroy: "min",
         },
       },
-      size: { value: 4, random: { enable: true, minimumValue: 2 } },
+      size: { value: { min: 2, max: 4 } },
       move: {
         enable: true,
         speed: { min: 5, max: 10 },
@@ -192,31 +193,31 @@ export const backgroundOptions: Record<string, ISourceOptions> = {
       color: { value: "#00bfff" },
       shape: { type: "circle" },
       opacity: { value: 0.7 },
-      size: { value: 3, random: true },
+      size: { value: { min: 1, max: 3 } },
       move: {
         enable: true,
         speed: 1,
         direction: "bottom-left",
-        out_mode: "out",
+        outModes: "out",
       },
     },
     interactivity: {
       events: {
-        onhover: { enable: true, mode: "repulse" },
+        onHover: { enable: true, mode: "repulse" },
       },
     },
   },
   stars: {
     fullScreen: { enable: true },
     particles: {
-      number: { value: 200, density: { enable: true, value_area: 800 } },
+      number: { value: 200, density: { enable: true } },
       color: { value: "#fff" },
       shape: { type: "star" },
       opacity: {
         value: { min: 0.3, max: 0.8 },
-        animation: { enable: true, speed: 1 },
+        animation: { enable: true, speed: 1, sync: false },
       },
-      size: { value: 1.5, random: { enable: true, minimumValue: 0.5 } },
+      size: { value: { min: 0.5, max: 1.5 } },
       move: {
         enable: false,
       },
@@ -228,13 +229,13 @@ export const backgroundOptions: Record<string, ISourceOptions> = {
       number: { value: 100 },
       color: { value: "#0f0" },
       shape: { type: "square" },
-      opacity: { value: 0.5, random: true },
+      opacity: { value: 0.5 },
       size: { value: 2 },
       move: {
         enable: true,
         speed: 5,
         direction: "top",
-        out_mode: "destroy",
+        outModes: "destroy",
       },
     },
     background: {
