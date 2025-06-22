@@ -1958,7 +1958,7 @@ const Dashboard = () => {
               currentBackground={
                 localData?.personalInfo?.backgroundKey || "default"
               }
-              onSelect={(key: string) => {
+              onSave={(key: string) => {
                 if (localData?.personalInfo) {
                   const updatedData = {
                     ...localData,
@@ -1969,7 +1969,9 @@ const Dashboard = () => {
                   };
                   setLocalData(updatedData);
                   saveData(updatedData);
-                  toast.success(`Fond d'écran "${key}" sélectionné !`);
+                  toast.success(
+                    `Fond d'écran "${key}" appliqué et sauvegardé !`
+                  );
                 }
               }}
             />

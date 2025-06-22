@@ -242,4 +242,96 @@ export const backgroundOptions: Record<string, ISourceOptions> = {
       image: "linear-gradient(to bottom, #000, #100)",
     },
   },
+  matrix: {
+    fullScreen: { enable: true },
+    particles: {
+      number: { value: 80 },
+      color: { value: "#00ff00" },
+      shape: {
+        type: "character",
+        options: {
+          character: {
+            value: "0123456789ABCDEF",
+            font: "Verdana",
+            style: "",
+            weight: "400",
+            fill: true,
+          },
+        },
+      },
+      opacity: { value: { min: 0.2, max: 0.8 } },
+      size: { value: 16 },
+      move: {
+        enable: true,
+        speed: 2,
+        direction: "bottom",
+        straight: true,
+        outModes: "destroy",
+      },
+    },
+  },
+  confetti: {
+    fullScreen: { enable: true },
+    particles: {
+      number: { value: 0 },
+      color: { value: ["#FFD700", "#FF4500", "#FF69B4", "#1E90FF"] },
+      shape: { type: ["circle", "square", "triangle", "star"] },
+      opacity: { value: 1 },
+      size: { value: { min: 5, max: 10 } },
+      move: {
+        enable: true,
+        speed: 20,
+        direction: "bottom",
+        gravity: { enable: true, acceleration: 20 },
+        outModes: "destroy",
+        decay: 0.05,
+      },
+    },
+    emitters: {
+      position: { x: 50, y: 30 },
+      rate: { quantity: 5, delay: 0.15 },
+      life: { duration: 0.2, count: 1 },
+    },
+  },
+  rain: {
+    fullScreen: { enable: true },
+    particles: {
+      number: { value: 100 },
+      color: { value: "#aaaaaa" },
+      shape: { type: "line" },
+      opacity: { value: 0.5 },
+      size: { value: { min: 10, max: 20 } },
+      move: {
+        enable: true,
+        speed: 8,
+        direction: "bottom",
+        straight: true,
+      },
+    },
+  },
+  hyperspace: {
+    fullScreen: { enable: true },
+    particles: {
+      number: { value: 300, density: { enable: true } },
+      color: { value: "#ffffff" },
+      shape: { type: "circle" },
+      opacity: { value: { min: 0.5, max: 1 } },
+      size: { value: 1 },
+      move: {
+        enable: true,
+        speed: 6,
+        direction: "none",
+        outModes: "out",
+        warp: true,
+      },
+    },
+    interactivity: {
+      events: {
+        onHover: { enable: true, mode: "bubble" },
+      },
+    },
+    background: {
+      color: "#000000",
+    },
+  },
 };
