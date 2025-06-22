@@ -10,7 +10,13 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { username, password } = req.body;
+    // Lire le corps de la requête manuellement
+    const bodyBuffer = [];
+    for await (const chunk of req) {
+      bodyBuffer.push(chunk);
+    }
+    const body = JSON.parse(Buffer.concat(bodyBuffer).toString());
+    const { username, password } = body;
 
     const adminUsername = process.env.ADMIN_USERNAME;
     const hashedPassword = process.env.ADMIN_PASSWORD;
