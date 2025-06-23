@@ -6,11 +6,6 @@ const fadeIn = keyframes`
   to { opacity: 1; transform: translateY(0); }
 `;
 
-const pulse = keyframes`
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.7; transform: scale(1.05); }
-`;
-
 const slideIn = keyframes`
   from { transform: translateX(-30px); opacity: 0; }
   to { transform: translateX(0); opacity: 1; }
@@ -150,12 +145,11 @@ export const DashboardContainer = styled.div`
     z-index: 0;
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: 768px) {
     flex-direction: column;
     min-height: 100vh;
-    width: 100vw;
     height: 100vh;
-    overflow-x: hidden;
+    overflow: hidden;
   }
 `;
 
@@ -204,6 +198,25 @@ export const HeaderSection = styled.header`
   .header-actions {
     display: flex;
     gap: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    padding: 1rem 1.5rem;
+    flex-direction: column;
+    gap: 1rem;
+    position: relative;
+
+    h1 {
+      font-size: 1.8rem;
+      text-align: center;
+    }
+
+    .header-actions {
+      width: 100%;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
   }
 `;
 
@@ -479,6 +492,36 @@ export const Sidebar = styled.aside`
       transform: scale(1.2) rotate(5deg);
     }
   }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    overflow-y: auto;
+    border-right: none;
+    border-bottom: 1px solid ${({ theme }) => theme.cardBorder};
+    padding: 1rem;
+    flex-shrink: 0;
+
+    button {
+      padding: 1rem 1.25rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      border-radius: 12px;
+
+      &:hover {
+        transform: translateY(-2px) scale(1.01);
+      }
+
+      &.active {
+        transform: translateY(-2px) scale(1.01);
+      }
+
+      svg {
+        font-size: 1rem;
+      }
+    }
+  }
 `;
 
 export const MainContent = styled.main`
@@ -487,6 +530,13 @@ export const MainContent = styled.main`
   overflow-y: auto;
   position: relative;
   z-index: 1;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+    flex: 1;
+    overflow-y: auto;
+    height: 100%;
+  }
 `;
 
 // --- Sections avec Effets Avancés ---
@@ -534,6 +584,24 @@ export const Section = styled.section`
       animation: ${float} 3s ease-in-out infinite;
     }
   }
+
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 16px;
+
+    &::before {
+      border-radius: 16px 16px 0 0;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      flex-direction: column;
+      text-align: center;
+      gap: 0.5rem;
+    }
+  }
 `;
 
 export const Card = styled.div`
@@ -576,6 +644,16 @@ export const Card = styled.div`
 
     &::before {
       left: 100%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    border-radius: 16px;
+
+    &:hover {
+      transform: translateY(-4px) scale(1.01);
     }
   }
 `;
@@ -660,6 +738,20 @@ export const Input = styled.input`
     border-color: rgba(255, 180, 0, 0.5);
     transform: translateY(-1px);
   }
+
+  @media (max-width: 768px) {
+    padding: 1rem 1.25rem;
+    font-size: 1rem;
+    border-radius: 12px;
+
+    &:focus {
+      transform: translateY(-1px);
+    }
+
+    &:hover {
+      transform: none;
+    }
+  }
 `;
 
 export const Textarea = styled.textarea`
@@ -696,6 +788,21 @@ export const Textarea = styled.textarea`
     border-color: rgba(255, 180, 0, 0.5);
     transform: translateY(-1px);
   }
+
+  @media (max-width: 768px) {
+    padding: 1rem 1.25rem;
+    font-size: 1rem;
+    border-radius: 12px;
+    min-height: 120px;
+
+    &:focus {
+      transform: translateY(-1px);
+    }
+
+    &:hover {
+      transform: none;
+    }
+  }
 `;
 
 export const Select = styled.select`
@@ -730,6 +837,22 @@ export const Select = styled.select`
   &:hover {
     border-color: rgba(255, 180, 0, 0.5);
     transform: translateY(-1px);
+  }
+
+  @media (max-width: 768px) {
+    padding: 1rem 1.25rem;
+    font-size: 1rem;
+    border-radius: 12px;
+    padding-right: 2.5rem;
+    background-size: 1.2em 1.2em;
+
+    &:focus {
+      transform: translateY(-1px);
+    }
+
+    &:hover {
+      transform: none;
+    }
   }
 `;
 
@@ -790,41 +913,106 @@ export const Button = styled.button`
     animation: none;
   }
 
-  &.secondary {
-    background: transparent;
-    border: 2px solid ${({ theme }) => theme.cardBorder};
-    color: ${({ theme }) => theme.text};
-    box-shadow: none;
+  @media (max-width: 768px) {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.9rem;
+    border-radius: 12px;
 
     &:hover {
-      background: ${({ theme }) => theme.cardBorder};
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      transform: translateY(-2px) scale(1.01);
     }
-  }
 
-  svg {
-    font-size: 1.1rem;
-    transition: transform 0.3s ease;
-  }
-
-  &:hover svg {
-    transform: scale(1.2);
+    &:active {
+      transform: translateY(-1px);
+    }
   }
 `;
 
 export const ActionButton = styled.button`
+  padding: 0.75rem 1.5rem;
   background: transparent;
   border: 2px solid ${({ theme }) => theme.cardBorder};
-  color: ${({ theme }) => theme.iconColor};
-  cursor: pointer;
-  padding: 1rem;
   border-radius: 12px;
+  color: ${({ theme }) => theme.text};
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 0.5rem;
+
+  &:hover {
+    background: ${({ theme }) => theme.cardBorder};
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  &.primary {
+    background: linear-gradient(135deg, #ffb400 0%, #ff8c00 100%);
+    border-color: transparent;
+    color: #0f172a;
+    box-shadow: 0 8px 25px rgba(255, 180, 0, 0.3);
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(255, 180, 0, 0.4);
+    }
+  }
+
+  &.danger {
+    border-color: #ef4444;
+    color: #ef4444;
+
+    &:hover {
+      background: #ef4444;
+      color: white;
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.8rem;
+    border-radius: 8px;
+
+    &:hover {
+      transform: translateY(-1px);
+    }
+
+    &.primary:hover {
+      transform: translateY(-2px);
+    }
+  }
+`;
+
+// --- Grilles de Statistiques Ultra-Modernes ---
+export const StatsGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+`;
+
+export const StatsCard = styled.div`
+  background: ${({ theme }) =>
+    theme.body === "#0F172A"
+      ? "rgba(15, 23, 42, 0.8)"
+      : "rgba(248, 250, 252, 0.8)"};
+  backdrop-filter: blur(20px);
+  border: 1px solid ${({ theme }) => theme.cardBorder};
+  border-radius: 20px;
+  padding: 2rem;
+  text-align: center;
+  animation: ${fadeIn} 0.6s ease-out;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  font-size: 1.1rem;
   position: relative;
   overflow: hidden;
 
@@ -838,97 +1026,65 @@ export const ActionButton = styled.button`
     background: linear-gradient(
       90deg,
       transparent,
-      rgba(255, 180, 0, 0.1),
+      rgba(255, 180, 0, 0.05),
       transparent
     );
-    transition: left 0.5s;
+    transition: left 0.6s;
   }
 
   &:hover {
-    background: ${({ theme }) => theme.cardBorder};
-    color: ${({ theme }) => theme.text};
-    transform: translateY(-3px) scale(1.1);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15),
+      0 0 0 1px rgba(255, 180, 0, 0.1);
 
     &::before {
       left: 100%;
     }
   }
 
-  &.delete:hover {
-    background: #ef444422;
-    border-color: #ef444488;
-    color: #ef4444;
-    box-shadow: 0 8px 25px rgba(239, 68, 68, 0.2);
-    animation: ${bounce} 0.6s ease-in-out;
+  .stat-icon {
+    font-size: 3rem;
+    color: #ffb400;
+    margin-bottom: 1rem;
+    animation: ${float} 3s ease-in-out infinite;
   }
 
-  svg {
-    transition: transform 0.3s ease;
-  }
-
-  &:hover svg {
-    transform: scale(1.2) rotate(5deg);
-  }
-`;
-
-// --- Statistiques Ultra-Modernes ---
-export const StatsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 2rem;
-  margin-bottom: 3rem;
-`;
-
-export const StatsCard = styled.div`
-  background: ${({ theme }) =>
-    theme.body === "#0F172A"
-      ? "rgba(30, 41, 59, 0.8)"
-      : "rgba(255, 255, 255, 0.8)"};
-  backdrop-filter: blur(30px);
-  border: 1px solid ${({ theme }) => theme.cardBorder};
-  border-radius: 20px;
-  padding: 2.5rem;
-  text-align: center;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(135deg, #ffb400 0%, #ff8c00 100%);
-    border-radius: 20px 20px 0 0;
-  }
-
-  &:hover {
-    transform: translateY(-8px) scale(1.05);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15),
-      0 0 0 1px rgba(255, 180, 0, 0.1);
-    animation: ${glow} 2s ease-in-out infinite;
-  }
-
-  .stat-number {
-    font-size: 3.5rem;
+  .stat-value {
+    font-size: 2.5rem;
     font-weight: 900;
+    color: ${({ theme }) => theme.text};
+    margin-bottom: 0.5rem;
     background: linear-gradient(135deg, #ffb400 0%, #ff8c00 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    margin-bottom: 1rem;
-    animation: ${pulse} 2s ease-in-out infinite;
   }
 
   .stat-label {
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: ${({ theme }) => theme.iconColor};
     font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+  }
+
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+    border-radius: 16px;
+
+    &:hover {
+      transform: translateY(-4px) scale(1.01);
+    }
+
+    .stat-icon {
+      font-size: 2.5rem;
+    }
+
+    .stat-value {
+      font-size: 2rem;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+    }
   }
 `;
 
@@ -938,11 +1094,10 @@ export const PreviewCard = styled.div`
       ? "rgba(15, 23, 42, 0.8)"
       : "rgba(248, 250, 252, 0.8)"};
   backdrop-filter: blur(20px);
-  border: 2px dashed ${({ theme }) => theme.cardBorder};
+  border: 1px solid ${({ theme }) => theme.cardBorder};
   border-radius: 16px;
-  padding: 2rem;
-  margin-top: 1.5rem;
-  text-align: center;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
   transition: all 0.3s ease;
 
   &:hover {
@@ -955,6 +1110,21 @@ export const PreviewCard = styled.div`
     color: ${({ theme }) => theme.text};
     font-weight: 700;
     font-size: 1.2rem;
+  }
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+    border-radius: 12px;
+    margin-bottom: 0.75rem;
+
+    h4 {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    &:hover {
+      transform: translateY(-1px);
+    }
   }
 `;
 
@@ -1033,6 +1203,41 @@ export const Modal = styled.div`
     justify-content: flex-end;
     gap: 1.5rem;
   }
+
+  @media (max-width: 768px) {
+    width: 95%;
+    max-height: 95vh;
+    border-radius: 20px;
+
+    &::before {
+      border-radius: 20px 20px 0 0;
+    }
+
+    .modal-header {
+      padding: 1.5rem;
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+
+      h3 {
+        font-size: 1.5rem;
+      }
+    }
+
+    .modal-body {
+      padding: 1.5rem;
+    }
+
+    .modal-footer {
+      padding: 1.5rem;
+      flex-direction: column;
+      gap: 1rem;
+
+      button {
+        width: 100%;
+      }
+    }
+  }
 `;
 
 export const Badge = styled.span`
@@ -1074,6 +1279,17 @@ export const Badge = styled.span`
       left: 100%;
     }
   }
+
+  @media (max-width: 768px) {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    border-radius: 8px;
+    margin: 0.125rem;
+
+    &:hover {
+      transform: translateY(-1px) scale(1.02);
+    }
+  }
 `;
 
 // --- Sélecteur d'Icônes Ultra-Moderne ---
@@ -1082,6 +1298,11 @@ export const IconGrid = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   gap: 1rem;
   margin-top: 1rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 0.75rem;
+  }
 `;
 
 export const IconItem = styled.div<{ isSelected: boolean }>`
@@ -1116,6 +1337,24 @@ export const IconItem = styled.div<{ isSelected: boolean }>`
     transform: translateY(-4px);
     border-color: ${({ theme }) => theme.accent};
     box-shadow: 0 8px 20px rgba(255, 180, 0, 0.15);
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.75rem;
+    border-radius: 8px;
+
+    svg {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    span {
+      font-size: 0.8rem;
+    }
+
+    &:hover {
+      transform: translateY(-2px);
+    }
   }
 `;
 
