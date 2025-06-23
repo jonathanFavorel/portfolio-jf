@@ -2,13 +2,13 @@ import type { DefaultTheme } from "styled-components";
 
 export const lightTheme: DefaultTheme = {
   body: "#F8FAFC",
-  text: "#1E293B",
+  text: "#0F172A",
   toggleBorder: "#FFF",
   background: "#F1F5F9",
   accent: "#ffb400",
-  cardBackground: "rgba(255, 255, 255, 0.8)",
-  cardBorder: "rgba(255, 255, 255, 0.9)",
-  iconColor: "#64748B",
+  cardBackground: "rgba(255, 255, 255, 0.95)",
+  cardBorder: "rgba(15, 23, 42, 0.1)",
+  iconColor: "#475569",
 };
 
 export const darkTheme: DefaultTheme = {

@@ -149,6 +149,14 @@ export const DashboardContainer = styled.div`
     pointer-events: none;
     z-index: 0;
   }
+
+  @media (max-width: 900px) {
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+  }
 `;
 
 // --- Header Principal avec Effets Modernes ---
