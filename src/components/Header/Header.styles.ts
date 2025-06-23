@@ -113,14 +113,33 @@ export const MenuToggle = styled(motion.div)`
   font-size: 1.5rem;
   color: ${({ theme }) => theme.text};
   z-index: 1001;
-  padding: 0.25rem;
+  padding: 0.5rem;
+  background: ${({ theme }) => theme.cardBackground};
+  border: 2px solid ${({ theme }) => theme.accent};
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    background: ${({ theme }) => theme.accent};
+    color: ${({ theme }) => theme.body};
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 180, 0, 0.3);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
 
   @media (max-width: 768px) {
     display: block;
+    font-size: 1.25rem;
+    padding: 0.4rem;
   }
 
   @media (max-width: 480px) {
-    font-size: 1.25rem;
+    font-size: 1.1rem;
+    padding: 0.3rem;
   }
 `;
 
@@ -206,6 +225,46 @@ export const MobileNav = styled(motion.div)`
     }
   }
 
+  .mobile-controls {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    padding: 1.5rem 2rem;
+    border-top: 1px solid ${({ theme }) => theme.cardBorder};
+    margin-top: auto;
+
+    button {
+      background: ${({ theme }) => theme.accent};
+      color: ${({ theme }) => theme.body};
+      border: 2px solid ${({ theme }) => theme.accent};
+      border-radius: 8px;
+      padding: 0.75rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 44px;
+      height: 44px;
+      font-size: 1rem;
+
+      &:hover {
+        background: ${({ theme }) => theme.body};
+        color: ${({ theme }) => theme.accent};
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(255, 180, 0, 0.3);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+
+      svg {
+        font-size: 1.1rem;
+      }
+    }
+  }
+
   @media (max-width: 480px) {
     width: 100%;
     right: 0;
@@ -213,6 +272,21 @@ export const MobileNav = styled(motion.div)`
     height: calc(100vh - 60px);
     border-left: none;
     border-top: 1px solid ${({ theme }) => theme.cardBorder};
+
+    .mobile-controls {
+      padding: 1rem 1.5rem;
+
+      button {
+        min-width: 40px;
+        height: 40px;
+        padding: 0.6rem;
+        font-size: 0.9rem;
+
+        svg {
+          font-size: 1rem;
+        }
+      }
+    }
   }
 `;
 
@@ -284,8 +358,8 @@ export const LangButton = styled(motion.button)`
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background: transparent;
-  border: 1px solid ${({ theme }) => theme.cardBorder};
+  background: ${({ theme }) => theme.cardBackground};
+  border: 2px solid ${({ theme }) => theme.cardBorder};
   color: ${({ theme }) => theme.text};
   padding: 0.5rem 0.75rem;
   border-radius: 8px;
@@ -294,16 +368,37 @@ export const LangButton = styled(motion.button)`
   font-weight: 500;
   transition: all 0.3s ease;
   white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 
   &:hover {
-    background: ${({ theme }) => theme.cardBackground};
+    background: ${({ theme }) => theme.accent};
     border-color: ${({ theme }) => theme.accent};
-    color: ${({ theme }) => theme.accent};
+    color: ${({ theme }) => theme.body};
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 180, 0, 0.3);
+  }
+
+  &:active {
+    transform: translateY(0);
   }
 
   @media (max-width: 768px) {
     padding: 0.4rem 0.6rem;
     font-size: 0.8rem;
+    border-width: 2px;
+    background: ${({ theme }) => theme.accent};
+    color: ${({ theme }) => theme.body};
+    border-color: ${({ theme }) => theme.accent};
+
+    &:hover {
+      background: ${({ theme }) => theme.body};
+      color: ${({ theme }) => theme.accent};
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.3rem 0.5rem;
+    font-size: 0.75rem;
   }
 `;
 
@@ -311,23 +406,59 @@ export const ThemeButton = styled(motion.button)`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: transparent;
-  border: 1px solid ${({ theme }) => theme.cardBorder};
-  color: ${({ theme }) => theme.text};
+  background: ${({ theme }) => theme.cardBackground};
+  border: 2px solid ${({ theme }) => theme.accent};
+  color: ${({ theme }) => theme.accent};
   padding: 0.5rem;
   border-radius: 8px;
   cursor: pointer;
   font-size: 1rem;
   transition: all 0.3s ease;
+  min-width: 40px;
+  height: 40px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 
   &:hover {
-    background: ${({ theme }) => theme.cardBackground};
-    border-color: ${({ theme }) => theme.accent};
-    color: ${({ theme }) => theme.accent};
+    background: ${({ theme }) => theme.accent};
+    color: ${({ theme }) => theme.body};
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 180, 0, 0.3);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  svg {
+    font-size: 1.1rem;
   }
 
   @media (max-width: 768px) {
     padding: 0.4rem;
     font-size: 0.9rem;
+    min-width: 36px;
+    height: 36px;
+    border-width: 2px;
+    background: ${({ theme }) => theme.accent};
+    color: ${({ theme }) => theme.body};
+
+    &:hover {
+      background: ${({ theme }) => theme.body};
+      color: ${({ theme }) => theme.accent};
+    }
+
+    svg {
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    min-width: 32px;
+    height: 32px;
+    padding: 0.3rem;
+
+    svg {
+      font-size: 0.9rem;
+    }
   }
 `;

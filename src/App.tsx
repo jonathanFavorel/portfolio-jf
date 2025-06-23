@@ -94,6 +94,11 @@ const Portfolio = () => {
     <StyledThemeProvider theme={currentTheme}>
       <CustomCursor />
       <GlobalStyles />
+      {/* Indicateur de thème pour mobile */}
+      <div
+        className="theme-indicator"
+        title={`Thème actuel: ${theme === "light" ? "Clair" : "Sombre"}`}
+      />
       {activeBackgroundOptions && activeBackgroundOptions.fullScreen && (
         <div
           style={{

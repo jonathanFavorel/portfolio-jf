@@ -52,4 +52,36 @@ export const GlobalStyles = createGlobalStyle`
     outline: none;
     font-family: inherit;
   }
+
+  /* Indicateur de thème pour mobile */
+  .theme-indicator {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: ${({ theme }) => theme.accent};
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+  }
+
+  @media (max-width: 768px) {
+    .theme-indicator {
+      width: 15px;
+      height: 15px;
+      top: 8px;
+      right: 8px;
+    }
+  }
+
+  /* Amélioration de la visibilité des boutons sur mobile */
+  @media (max-width: 768px) {
+    button {
+      min-height: 44px;
+      min-width: 44px;
+    }
+  }
 `;

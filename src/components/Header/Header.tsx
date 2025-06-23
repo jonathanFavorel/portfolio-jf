@@ -188,12 +188,17 @@ const Header = () => {
             ))}
             <motion.div
               variants={mobileNavItemVariants}
-              style={{ display: "flex", gap: "1rem", justifyContent: "center" }}
+              className="mobile-controls"
             >
               <ThemeButton
                 onClick={toggleTheme}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
+                title={
+                  theme === "light"
+                    ? "Passer en mode sombre"
+                    : "Passer en mode clair"
+                }
               >
                 {theme === "light" ? <FaMoon /> : <FaSun />}
               </ThemeButton>
@@ -203,6 +208,11 @@ const Header = () => {
                 }
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
+                title={
+                  i18n.language === "fr"
+                    ? "Switch to English"
+                    : "Passer en français"
+                }
               >
                 <FaGlobe />
                 <span>{i18n.language === "fr" ? "EN" : "FR"}</span>
