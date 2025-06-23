@@ -16,7 +16,10 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    background: ${({ theme }) => theme.body};
+    background: ${({ theme }) =>
+      theme.body === "#F8FAFC"
+        ? `linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 50%, #E2E8F0 100%)`
+        : theme.body};
     color: ${({ theme }) => theme.text};
     font-family: 'Inter', sans-serif;
     transition: all 0.25s linear;
@@ -33,7 +36,10 @@ export const GlobalStyles = createGlobalStyle`
     max-width: 100vw;
     min-height: 100vh;
     height: 100%;
-    background: ${({ theme }) => theme.body};
+    background: ${({ theme }) =>
+      theme.body === "#F8FAFC"
+        ? `linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 50%, #E2E8F0 100%)`
+        : theme.body};
   }
 
   .app-container {
@@ -42,11 +48,6 @@ export const GlobalStyles = createGlobalStyle`
     max-width: 100vw;
     min-height: 100vh;
     height: 100%;
-    background: ${({ theme }) => theme.body};
-  }
-
-  /* Amélioration de la visibilité du thème light */
-  body {
     background: ${({ theme }) =>
       theme.body === "#F8FAFC"
         ? `linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 50%, #E2E8F0 100%)`
